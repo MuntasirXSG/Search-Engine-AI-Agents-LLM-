@@ -1,0 +1,16 @@
+langchain-core
+langchain==0.3.27
+langchain-groq==0.3.8
+langchain-text-splitters
+langchain-community
+langchain_chroma
+ipykernel
+python-dotenv
+chromadb
+faiss-cpu
+pandas
+bs4
+pypdf
+streamlit
+sentence_transformers
+langchain_huggingface
