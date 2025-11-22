@@ -22,20 +22,28 @@ search = DuckDuckGoSearchRun(name="Search")
 
 load_dotenv() #forgot this ***IMPORTANT**
 
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = "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"
-embedding = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+
+
 loader = WebBaseLoader('https://www.investopedia.com/personal-finance/top-highest-paying-jobs/')
 docs = loader.load()
 documents = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200).split_documents(docs)
-vectordb = FAISS.from_documents(documents,embedding).as_retriever()
-ret_tool = create_retriever_tool(vectordb,"retrivtool" ,"search the web link" )
+
 
 
 
 st.title("Search Engine")
 st.sidebar.title("settings")
 api = st.sidebar.text_input("Enter your groq api :", type = "password")
+hf_api_token = st.sidebar.text_input(
+    "Enter your Hugging Face API Key",
+    type="password"
+)
+if hf_api_token:
+ os.environ["HUGGINGFACEHUB_API_TOKEN"] = hf_api_token
+ embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
+ vectordb = FAISS.from_documents(documents,embedding).as_retriever()
+ ret_tool = create_retriever_tool(vectordb,"retrivtool" ,"search the web link" )
 if api:
  llm1 = ChatGroq(groq_api_key=api, model_name="openai/gpt-oss-20b")
  if "text" not in st.session_state:
@@ -59,5 +67,6 @@ if api:
        st.session_state.text.append({"role":"assistant", "content":response})
 
        st.write(response)
+
 
 
