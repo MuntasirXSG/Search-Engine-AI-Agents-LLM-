@@ -40,7 +40,7 @@ hf_api_token = st.sidebar.text_input(
 )
 if hf_api_token:
  os.environ["HUGGINGFACEHUB_API_TOKEN"] = hf_api_token
- embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+ embedding= HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
  vectordb = FAISS.from_documents(documents,embedding).as_retriever()
  ret_tool = create_retriever_tool(vectordb,"retrivtool" ,"search the web link" )
@@ -67,6 +67,7 @@ if api:
        st.session_state.text.append({"role":"assistant", "content":response})
 
        st.write(response)
+
 
 
 
