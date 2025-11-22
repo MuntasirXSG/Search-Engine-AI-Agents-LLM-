@@ -16,5 +16,6 @@ sentence_transformers
 langchain_huggingface
 arxiv
 wikipedia
-duckduckgo-search==0.9.9
+ddgs
+
 
