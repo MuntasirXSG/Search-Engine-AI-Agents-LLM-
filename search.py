@@ -22,8 +22,8 @@ search = DuckDuckGoSearchRun(name="Search")
 
 load_dotenv() #forgot this ***IMPORTANT**
 
-
-embedding = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2",huggingfacehub_api_token="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")
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = "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"
+embedding = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 loader = WebBaseLoader('https://www.investopedia.com/personal-finance/top-highest-paying-jobs/')
 docs = loader.load()
 documents = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200).split_documents(docs)
@@ -59,4 +59,5 @@ if api:
        st.session_state.text.append({"role":"assistant", "content":response})
 
        st.write(response)
+
 
