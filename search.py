@@ -22,7 +22,7 @@ search = DuckDuckGoSearchRun(name="Search")
 
 load_dotenv() #forgot this ***IMPORTANT**
 
-os.environ["HFT"]=os.getenv("HF_TOKEN")
+
 embedding = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2",huggingfacehub_api_token="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")
 loader = WebBaseLoader('https://www.investopedia.com/personal-finance/top-highest-paying-jobs/')
 docs = loader.load()
@@ -59,3 +59,4 @@ if api:
        st.session_state.text.append({"role":"assistant", "content":response})
 
        st.write(response)
+
