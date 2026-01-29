@@ -17,5 +17,7 @@ langchain_huggingface
 arxiv
 wikipedia
 ddgs
+altair==4.2.2
+
 
 
